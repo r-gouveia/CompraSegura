@@ -1,15 +1,16 @@
 package com.jwt.CompraSegura.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Entity
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     private String nome;
     private String email;
@@ -20,7 +21,7 @@ public class User {
 
     public User(){}
 
-    public User(Long id, String nome, String email, String password, Integer idade, String cpf, String regiao) {
+    public User(UUID id, String nome, String email, String password, Integer idade, String cpf, String regiao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -30,11 +31,11 @@ public class User {
         this.regiao = regiao;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
