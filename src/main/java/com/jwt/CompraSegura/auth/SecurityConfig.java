@@ -2,7 +2,6 @@ package com.jwt.CompraSegura.auth;
 
 
 import com.jwt.CompraSegura.service.UserService;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

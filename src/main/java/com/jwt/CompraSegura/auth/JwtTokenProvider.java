@@ -6,12 +6,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+
+
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider { //cria, valida e extrai infos
 
-    private String jwtSecret = "queroestagio" ;
+    private String jwtSecret = "1ad68fa490273f03fd58198feaaa8e40709c371c895e903053116cbe4b01d3d6";
     private long jwtExpiration = 86400000 ;
 
     public String generateToken(UserDetails userDetails){
@@ -27,7 +29,7 @@ public class JwtTokenProvider { //cria, valida e extrai infos
             Jwts.parserBuilder()
                     .setSigningKey(jwtSecret)
                     .build()
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
             return true;
