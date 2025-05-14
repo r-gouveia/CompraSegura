@@ -7,6 +7,7 @@ import com.jwt.CompraSegura.dto.UserDTO;
 import com.jwt.CompraSegura.entity.User;
 import com.jwt.CompraSegura.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.webauthn.api.AuthenticatorResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +28,7 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
     @Autowired
+    @Lazy
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
@@ -39,7 +40,8 @@ public class AuthController {
     public ResponseEntity<AuthResponseDTO> login (@RequestBody LoginDTO login ){
         Authentication authentication = authenticationManager.authenticate (new UsernamePasswordAuthenticationToken(login.getEmail(),login.getPassword()));
 
-        String token = jwtTokenProvider.generateToken((User) authentication.getPrincipal());
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String token = jwtTokenProvider.generateToken(userDetails);
         return ResponseEntity.ok(new AuthResponseDTO(token));
     }
 
