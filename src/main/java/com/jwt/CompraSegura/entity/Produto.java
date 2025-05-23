@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,11 +17,11 @@ public class Produto {
     private UUID id;
     private String categoria;
     private String nome;
-    private double valor;
+    private BigDecimal valor;
 
     public Produto(){}
 
-    public Produto(String categoria, String nome, double valor){
+    public Produto(String categoria, String nome, BigDecimal valor){
         this.categoria = categoria;
         this.nome = nome;
         this.valor = valor;
@@ -64,11 +65,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 }
